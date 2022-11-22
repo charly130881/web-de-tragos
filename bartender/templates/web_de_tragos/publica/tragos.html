@@ -1,0 +1,85 @@
+{% extends './base.html' %}
+    
+{% block cabecera %}
+    {% load static %}
+    <header class="masthead" style="background-image: url({% static '/img/tragos-bg.jpg' %})">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="post-heading">
+                        <h1>Más de 30 tragos!!</h1>
+                        <h2 class="subheading">Sorprendé a tus invitados</h2>                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock cabecera %}
+
+{% block contenido %}
+    <!-- Post Content-->
+    <article class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <h3>Destornillador</h3>
+                    <img src={% static '/img/destornillador.jpg' %} alt="" height="450px">
+                    <h4>Lo que necesitás</h4>
+                    <ul>
+                        <li>1 vaso largo</li>
+                        <li>2 onzas o 3 partes de vodka</li>
+                        <li>5 onzas o 7 partes de zumo de naranja</li>
+                        <li>Hielo</li>
+                        <li>Una rodaja de naranja</li>                            
+                    </ul>
+                    <h4>Preparación</h4>
+                    <p>Coloca 2 o 3 cubos de hielo en un vaso largo, añade las 2 onzas de vodka o, si no tienes medidor, incorpora 3 partes de este licor teniendo en cuenta el tamaño del vaso. Luego añade jugo de naranja preferiblemente natural, remueve y completa con una rodaja de naranja para decorar el vaso. Si quieres que tu trago sea un éxito, entonces lo mejor es optar por una vodka de calidad y un jugo natural dulce y delicioso.</p>
+                </div>
+            </div>
+        </div>
+    </article>
+    <article class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <h3>Alexander</h3>
+                    <img src={% static '/img/alexander.jpg' %} alt="" height="450px">
+                    <h4>Lo que necesitás</h4>
+                    <ul>
+                        <li>1 Copa</li>
+                        <li>60 ml de Ginebra</li>
+                        <li>30 ml de crema de Cacao</li>
+                        <li>30 ml crema de leche</li>                              
+                    </ul>
+                    <h4>Preparación</h4>
+                    <p>Agregue todos los ingredientes a una coctelera con hielo. Agitar durante 10-15 segundos.
+                        Decorar con nuez moscada recién rallada y servir.</p>
+                </div>
+            </div>
+        </div>
+    </article>
+    <article class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <h3>Margarita</h3>
+                    <img src={% static '/img/margarita.jpeg' %} alt="" height="450px">
+                    <h4>Lo que necesitás</h4>
+                    <ul>
+                        <li>1 Copa de boca ancha</li>
+                        <li>60 ml de Tequila blanco</li>
+                        <li>40 ml de triple seco o licor de naranja</li>
+                        <li>60 ml de zumo de lima</li>
+                        <li>Hielo</li>
+                        <li>Sal y azúcar para adornar</li>                                                        
+                    </ul>
+                    <h4>Preparación</h4>
+                    <p>Primero decoraremos el borde de sal. Cogemos un vaso ancho y ovalado (el clásico de margarita) lo mojamos en un poco de sirope de azúcar presionando y a continuación, lo pasamos por un plato con sal, colocamos la lima y reservamos.
+                        Exprimimos las limas para extraer su zumo, puedes utilizar un prensador de limas que resulta de lo más útil pero también te sirve cualquier exprimidor que utilices para limones o naranjas. En nuestro caso no colamos el zumo, aunque si cae alguna pepita la retiramos.
+                        Con la ayuda del vaso medidor vertemos en la coctelera el zumo de lima recién exprimido, el tequila, y el triple seco, en este orden.
+                        Metemos cuatro o cinco cubos de hielo y agitamos bien durante unos 15 segundo, con brío y arte. Luego servimos el cóctel con ayuda del filtro de la propia coctelera o el colador en el vaso que tenemos preparado anteriormente.</p>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock contenido %}
