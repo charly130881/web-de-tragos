@@ -10,5 +10,16 @@ from datetime import datetime
 #     return HttpResponse(template.render(request))
 
 def index(request):
-    return render(request, 'web_de_tragos/index.html',{'hoy': datetime.now})
+    return render(request, 'web_de_tragos/index.html')
 
+
+def about(request):
+    return render(request, 'web_de_tragos/about.html')
+
+
+def tragos(request):
+    return render(request, 'web_de_tragos/tragos.html')
+
+
+def contact(request):
+    return render(request, 'web_de_tragos/contact.html')
