@@ -1,0 +1,39 @@
+{% extends './base.html' %}
+
+{% block contenido %}
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <!-- Post preview-->
+                <div class="post-preview">
+                    <a href={% url 'tragos' %}>
+                        <h2 class="post-title">Querés aprender a hacer Tragos?</h2>
+                        <h3 class="post-subtitle">Tenemos un monton de Recetas</h3>
+                    </a>
+                
+                </div>
+                <!-- Divider-->
+                <hr class="my-4" />
+                <!-- Post preview-->
+                <div class="post-preview">
+                    <a href={% url 'tragos' %}>
+                        <h2 class="post-title">Se un Barman o Barwoman profesional!!</h2>
+                        <h3 class="post-subtitle">Inscribite a nuestros cursos</h3>
+                    </a>
+                
+                </div>
+                <!-- Divider-->
+                <hr class="my-4" />
+                <!-- Post preview-->
+                <div class="post-preview">
+                    <a href={% url 'tragos' %}>
+                        <h2 class="post-title">Sé parte de nuestro Staff</h2>
+                        <h3 class="post-subtitle">Si ya te egresaste de nuestra escuela o tenes conocimientos previos, anotate!!!</h3>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+{% endblock contenido %}
