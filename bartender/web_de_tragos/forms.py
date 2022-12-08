@@ -27,12 +27,12 @@ class ContactoForm(forms.Form):
     telefono = forms.CharField(
             label='Telefono',
             max_length=12,
-            widget= forms.TextInput(attrs={'class':'form-control'})
+            widget= forms.TextInput(attrs={'class':'form-control','type':'tel','placeholder':'Enter your phone number...'})
             )
     mensaje = forms.CharField(
             label='Mensaje',
             max_length=500,
-            widget=forms.Textarea(attrs={'class':'form-control','rows':5})
+            widget=forms.Textarea(attrs={'class':'form-control','rows':7,'type':'textarea','placeholder':'Enter your messages...'})
             )
 
     def clean_mensaje(self):
