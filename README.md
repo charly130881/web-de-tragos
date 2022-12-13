@@ -1,8 +1,6 @@
 # Grupo 6
 
-## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
-##               web de tragos               ##
-## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
+##         web de tragos         ##
 
 
 # Carlos Dominguez (Usuario en github: charly130881)
