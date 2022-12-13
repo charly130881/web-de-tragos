@@ -3,8 +3,12 @@ from multiprocessing import context
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.urls import reverse
-from .forms import ContactoForm
+from .forms import ContactoForm, RecetaForm, RecetaFormValidado
 from django.contrib import messages
+from datetime import datetime
+from .models import Receta
+from django.views import View
+from django.views.generic import ListView
 
 # Create your views here.
 
@@ -39,3 +43,63 @@ def contacto(request):
     context = {'titulo': 'Contacto'}
     return HttpResponse(template.render(context, request)) 
  """
+ 
+def index_administracion(request):
+    variable = 'test variable'
+    return render(request, 'web_de_tragos/administracion/index_administracion.html', {'variable': variable})
+
+
+def recetas_index(request):
+    recetas = Receta.objects.all().order_by('fecha_creacion')
+    return render(request, 'web_de_tragos/administracion/recetas/index.html', {'recetas': recetas})
+
+
+class RecetasListView(ListView):
+    model = Receta
+    context_object_name = 'recetas'
+    template_name = 'web_de_tragos/administracion/recetas/index.html'
+    ordering = ['fecha_creacion']
+
+
+class RecetasView(View):
+    form_class = RecetaFormValidado
+    template_name = 'web_de_tragos/administracion/recetas/nuevo.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'formulario': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('recetas_index')
+
+        return render(request, self.template_name, {'formulario': form})
+
+
+def recetas_editar(request, id_receta):
+    try:
+        receta = Receta.objects.get(id=id_receta)
+    except Receta.DoesNotExist:
+        return render(request, 'web_de_tragos/administracion/404_admin.html')
+    
+    if request.method == "POST":
+        formulario = RecetaForm(request.POST, instance=receta)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('recetas_index')
+    else:
+        formulario = RecetaForm(instance=receta)
+
+    return render(request, 'web_de_tragos/administracion/recetas/editar.html', {'formulario': formulario, 'id_receta': id_receta})
+
+
+def recetas_eliminar(request, id_receta):
+    try:
+        receta = Receta.objects.get(id=id_receta)
+    except Receta.DoesNotExist:
+        return render(request, 'web_de_tragos/administracion/404_admin.html')
+    
+    receta.delete()
+    return redirect('recetas_index')

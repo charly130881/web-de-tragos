@@ -1,5 +1,7 @@
 from django import forms
 from django.forms import ValidationError
+from .models import Receta
+
 
 def solo_caracteres(value):
     if any(char.isdigit() for char in value ):
@@ -40,4 +42,27 @@ class ContactoForm(forms.Form):
         if len(data) < 10:
             raise ValidationError("El mensaje no puede ser menor a 10 caracteres")
         return data
+
+
+class RecetaForm(forms.ModelForm):
+    nombre = forms.CharField(error_messages={'required': 'dale, inventate un nombre al menos'})
     
+    class Meta:
+        model = Receta
+        fields = '__all__'    
+        widgets = {
+            'apellido': forms.Textarea(attrs={'cols': 20, 'rows': 20}),
+        }
+        error_messages = {
+            'email': {
+                'required': 'Y EL VALOR QUE ONDA?',
+            },
+        } 
+    
+class RecetaFormValidado(RecetaForm):
+    def clean_nombre(self):
+        nombre = self.cleaned_data['nombre']
+        if nombre.upper() == "AGUA":
+            raise ValidationError("El Agua no es un trago, es solo agua")
+
+        return nombre
