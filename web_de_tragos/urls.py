@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.urls import path
 from . import views
 from django.conf import settings
@@ -37,3 +38,5 @@ urlpatterns = [
     path('administracion/caracteristicas', views.CaracteristicasListView.as_view(), name='caracteristicas_index'),
     
 ]
+=======
+>>>>>>> 760f479ce591e835c09039ac06154c43b31b771b

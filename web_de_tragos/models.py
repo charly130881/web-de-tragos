@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+<<<<<<< HEAD
+=======
 
 # class estudiante(models.Model):
 #     nombre = models.CharField(max_length=100, verbose_name='name del estudiante')
@@ -43,3 +45,4 @@ class Receta(models.Model):
             raise ValueError("El Agua no es un trago, es... solo agua")
         else:
             super().save(*args, **kwargs)
+>>>>>>> 522867f6685caa9ff44efe8528ec45e6a584f3f1
