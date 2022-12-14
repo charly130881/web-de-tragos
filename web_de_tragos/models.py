@@ -13,19 +13,22 @@ from django.db import models
 
 class Tamaño(models.Model):
     tamaño = models.CharField(max_length=25, verbose_name='Tamaño', default=1)
+    info_tamaño = models.TextField(("info del tamaño"))
 
 class Funcion(models.Model):
     funcion = models.CharField(max_length=25, verbose_name='Funcion', default=1)
+    info_Funcion = models.TextField(("info de funcion"))
   
 class Caracteristica(models.Model):
     caracteristica = models.CharField(max_length=25, verbose_name='Caracteristica', default=1)
+    info_caracteristica = models.TextField(("info de caracteristica"))
     
-class Usuario(models.Model):
-    usuario = models.CharField(max_length=25, verbose_name='nombre de usuario')
+# class Usuario(models.Model):
+#     usuario = models.CharField(max_length=25, verbose_name='nombre de usuario')
 
 class Receta(models.Model):
     nombre = models.CharField(max_length=150, verbose_name='nombre')
-    usuario = models.ForeignKey(Usuario, verbose_name="user", on_delete=models.CASCADE)
+    # usuario = models.ForeignKey(Usuario, verbose_name="user", on_delete=models.CASCADE)
     fecha_creacion = models.DateField (verbose_name='Fecha de creación')
     # imagen = models.ImageField(upload_to='Imagenes/', verbose_name='Imagen', null=True)
     Ingredientes = models.TextField(verbose_name='Ingredientes') 

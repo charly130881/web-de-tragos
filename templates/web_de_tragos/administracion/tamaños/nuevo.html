@@ -1,0 +1,22 @@
+{% extends 'web_de_tragos\administracion\base.html' %}
+
+{% block titulo %}Nueva Tamaño{% endblock%}
+
+{% block contenido %}
+<h1 class="mt-4">tamaños</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{% url 'inicio_administracion' %}">Administracion</a></li>
+    <li class="breadcrumb-item active">Nuevo tamaño</li>
+</ol>
+
+
+<div class="card">
+    <div class="card-header">Creacion de tamaño</div>
+    <div class="card-body">
+        <form action="{% url 'tamaños_nuevo' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'web_de_tragos/administracion/form_campos.html' %}
+        </form>
+    </div>
+</div>
+{% endblock %}

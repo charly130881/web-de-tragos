@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ValidationError
-from .models import Receta
+from .models import Receta, Tamaño, Caracteristica, Funcion
 
 
 def solo_caracteres(value):
@@ -51,13 +51,9 @@ class RecetaForm(forms.ModelForm):
         model = Receta
         fields = '__all__'    
         widgets = {
-            'apellido': forms.Textarea(attrs={'cols': 20, 'rows': 20}),
+            'Ingredientes': forms.Textarea(attrs={'cols': 20, 'rows': 20}),
+            'preparacion': forms.Textarea(attrs={'cols': 20, 'rows': 20}),
         }
-        error_messages = {
-            'email': {
-                'required': 'Y EL VALOR QUE ONDA?',
-            },
-        } 
     
 class RecetaFormValidado(RecetaForm):
     def clean_nombre(self):
@@ -66,3 +62,27 @@ class RecetaFormValidado(RecetaForm):
             raise ValidationError("El Agua no es un trago, es solo agua")
 
         return nombre
+    
+
+class TamañoForm(forms.ModelForm):
+    nombre = forms.CharField(error_messages={'required': 'dale, inventate un nombre al menos'})
+    
+    class Meta:
+        model = Tamaño
+        fields = '__all__'
+    
+class FuncionForm(forms.ModelForm):
+    nombre = forms.CharField(error_messages={'required': 'dale, inventate un nombre al menos'})
+    
+    class Meta:
+        model = Funcion
+        fields = '__all__'
+
+class CaracteristicaForm(forms.ModelForm):
+    nombre = forms.CharField(error_messages={'required': 'dale, inventate un nombre al menos'})
+    
+    class Meta:
+        model = Caracteristica
+        fields = '__all__'
+
+

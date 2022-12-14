@@ -3,10 +3,10 @@ from multiprocessing import context
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.urls import reverse
-from .forms import ContactoForm, RecetaForm, RecetaFormValidado
+from .forms import ContactoForm, RecetaForm, RecetaFormValidado, TamañoForm, CaracteristicaForm, FuncionForm
 from django.contrib import messages
 from datetime import datetime
-from .models import Receta
+from .models import Receta, Tamaño, Caracteristica, Funcion
 from django.views import View
 from django.views.generic import ListView
 
@@ -48,6 +48,7 @@ def index_administracion(request):
     variable = 'test variable'
     return render(request, 'web_de_tragos/administracion/index_administracion.html', {'variable': variable})
 
+#RECETAS
 
 def recetas_index(request):
     recetas = Receta.objects.all().order_by('fecha_creacion')
@@ -103,3 +104,175 @@ def recetas_eliminar(request, id_receta):
     
     receta.delete()
     return redirect('recetas_index')
+
+
+#TAMAÑO
+
+def tamaño_index(request):
+    tamaños = Tamaño.objects.all()
+    return render(request, 'web_de_tragos/administracion/tamaños/index.html', {'tamaños': tamaños})
+
+
+class TamañosListView(ListView):
+    model = Tamaño
+    context_object_name = 'tamaños'
+    template_name = 'web_de_tragos/administracion/tamaños/index.html'
+
+
+class TamañosView(View):
+    form_class = TamañoForm
+    template_name = 'web_de_tragos/administracion/tamaños/nuevo.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'formulario': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('tamaños_index')
+
+        return render(request, self.template_name, {'formulario': form})
+
+
+def tamaños_editar(request, id_tamaño):
+    try:
+        tamaño = Tamaño.objects.get(id=id_tamaño)
+    except Tamaño.DoesNotExist:
+        return render(request, 'web_de_tragos/administracion/404_admin.html')
+    
+    if request.method == "POST":
+        formulario = TamañoForm(request.POST, instance=tamaño)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('tamaños_index')
+    else:
+        formulario = TamañoForm(instance=tamaño)
+
+    return render(request, 'web_de_tragos/administracion/tamaños/editar.html', {'formulario': formulario, 'id_tamaño': id_tamaño})
+
+
+def tamaños_eliminar(request, id_tamaño):
+    try:
+        tamaño = Tamaño.objects.get(id=id_tamaño)
+    except Tamaño.DoesNotExist:
+        return render(request, 'web_de_tragos/administracion/404_admin.html')
+    
+    tamaño.delete()
+    return redirect('tamaños_index')
+
+
+#CARACTERISTICA
+
+def caracteristica_index(request):
+    caracteristicas = Caracteristica.objects.all()
+    return render(request, 'web_de_tragos/administracion/caracteristicas/index.html', {'caracteristicas': caracteristicas})
+
+
+class CaracteristicasListView(ListView):
+    model = Caracteristica
+    context_object_name = 'caracteristicas'
+    template_name = 'web_de_tragos/administracion/caracteristicas/index.html'
+
+
+class CaracteristicasView(View):
+    form_class = CaracteristicaForm
+    template_name = 'web_de_tragos/administracion/caracteristicas/nuevo.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'formulario': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('caracteristicas_index')
+
+        return render(request, self.template_name, {'formulario': form})
+
+
+def caracteristicas_editar(request, id_caracteristica):
+    try:
+        caracteristica = Caracteristica.objects.get(id=id_caracteristica)
+    except Caracteristica.DoesNotExist:
+        return render(request, 'web_de_tragos/administracion/404_admin.html')
+    
+    if request.method == "POST":
+        formulario = CaracteristicaForm(request.POST, instance=caracteristica)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('caracteristicas_index')
+    else:
+        formulario = CaracteristicaForm(instance=caracteristica)
+
+    return render(request, 'web_de_tragos/administracion/caracteristicas/editar.html', {'formulario': formulario, 'id_caracteristica': id_caracteristica})
+
+
+def caracteristicas_eliminar(request, id_caracteristica):
+    try:
+        caracteristica = Caracteristica.objects.get(id=id_caracteristica)
+    except Caracteristica.DoesNotExist:
+        return render(request, 'web_de_tragos/administracion/404_admin.html')
+    
+    caracteristica.delete()
+    return redirect('caracteristicas_index')
+
+#FUNCION
+
+def funcion_index(request):
+    funciones = Funcion.objects.all()
+    return render(request, 'web_de_tragos/administracion/funciones/index.html', {'funciones': funciones})
+
+
+class FuncionesListView(ListView):
+    model = Funcion
+    context_object_name = 'funciones'
+    template_name = 'web_de_tragos/administracion/funciones/index.html'
+
+
+class FuncionesView(View):
+    form_class = FuncionForm
+    template_name = 'web_de_tragos/administracion/funciones/nuevo.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'formulario': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('funciones_index')
+
+        return render(request, self.template_name, {'formulario': form})
+
+
+def funciones_editar(request, id_funcion):
+    try:
+        funcion = Funcion.objects.get(id=id_funcion)
+    except Funcion.DoesNotExist:
+        return render(request, 'web_de_tragos/administracion/404_admin.html')
+    
+    if request.method == "POST":
+        formulario = FuncionForm(request.POST, instance=funcion)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('funciones_index')
+    else:
+        formulario = FuncionForm(instance=funcion)
+
+    return render(request, 'web_de_tragos/administracion/funciones/editar.html', {'formulario': formulario, 'id_funcion': id_funcion})
+
+
+def funciones_eliminar(request, id_funcion):
+    try:
+        funcion = Funcion.objects.get(id=id_funcion)
+    except Funcion.DoesNotExist:
+        return render(request, 'web_de_tragos/administracion/404_admin.html')
+    
+    funcion.delete()
+    return redirect('funciones_index')
+
+
