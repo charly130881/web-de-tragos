@@ -30,7 +30,7 @@ class Receta(models.Model):
     nombre = models.CharField(max_length=150, verbose_name='nombre')
     # usuario = models.ForeignKey(Usuario, verbose_name="user", on_delete=models.CASCADE)
     fecha_creacion = models.DateField (verbose_name='Fecha de creación')
-    # imagen = models.ImageField(upload_to='Imagenes/', verbose_name='Imagen', null=True)
+    imagen = models.ImageField(upload_to='Imagenes/', verbose_name='Imagen', null=True)
     Ingredientes = models.TextField(verbose_name='Ingredientes') 
     preparacion = models.TextField(verbose_name='Preparacion')
     # tipo = models.ManyToManyField(Tipo)
@@ -43,3 +43,6 @@ class Receta(models.Model):
             raise ValueError("El Agua no es un trago, es... solo agua")
         else:
             super().save(*args, **kwargs)
+            
+    def __str__(self):
+        return f"{self.nombre} - {self.tamaño}, {self.funcion}"        

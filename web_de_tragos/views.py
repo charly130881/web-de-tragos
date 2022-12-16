@@ -3,21 +3,13 @@ from multiprocessing import context
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.urls import reverse
-<<<<<<< HEAD
-from .forms import ContactoForm, RecetaForm, RecetaFormValidado, TamañoForm, CaracteristicaForm, FuncionForm
-=======
-<<<<<<< HEAD
-from .forms import ContactoForm
-from django.contrib import messages
-=======
+from .forms import ContactoForm, RecetaFormValidado, TamañoForm, CaracteristicaForm, FuncionForm
 from .forms import ContactoForm, RecetaForm, RecetaFormValidado
->>>>>>> 760f479ce591e835c09039ac06154c43b31b771b
 from django.contrib import messages
 from datetime import datetime
 from .models import Receta, Tamaño, Caracteristica, Funcion
 from django.views import View
 from django.views.generic import ListView
->>>>>>> 522867f6685caa9ff44efe8528ec45e6a584f3f1
 
 # Create your views here.
 
@@ -53,8 +45,7 @@ def contacto(request):
     return HttpResponse(template.render(context, request)) 
 <<<<<<< HEAD
  """
-=======
- """
+
  
 def index_administracion(request):
     variable = 'test variable'
@@ -116,8 +107,6 @@ def recetas_eliminar(request, id_receta):
     
     receta.delete()
     return redirect('recetas_index')
-<<<<<<< HEAD
-
 
 #TAMAÑO
 
@@ -287,8 +276,3 @@ def funciones_eliminar(request, id_funcion):
     
     funcion.delete()
     return redirect('funciones_index')
-
-
-=======
->>>>>>> 522867f6685caa9ff44efe8528ec45e6a584f3f1
->>>>>>> 760f479ce591e835c09039ac06154c43b31b771b
