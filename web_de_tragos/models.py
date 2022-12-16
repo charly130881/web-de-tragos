@@ -14,14 +14,23 @@ from django.db import models
 class Tamaño(models.Model):
     tamaño = models.CharField(max_length=25, verbose_name='Tamaño', default=1)
     info_tamaño = models.TextField(("info del tamaño"))
+    
+    def __str__(self):
+        return f"{self.tamaño}"  
 
 class Funcion(models.Model):
     funcion = models.CharField(max_length=25, verbose_name='Funcion', default=1)
     info_Funcion = models.TextField(("info de funcion"))
+    
+    def __str__(self):
+        return f"{self.funcion}"  
   
 class Caracteristica(models.Model):
     caracteristica = models.CharField(max_length=25, verbose_name='Caracteristica', default=1)
     info_caracteristica = models.TextField(("info de caracteristica"))
+    
+    def __str__(self):
+        return f"{self.caracteristica}"      
     
 # class Usuario(models.Model):
 #     usuario = models.CharField(max_length=25, verbose_name='nombre de usuario')

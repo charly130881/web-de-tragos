@@ -22,10 +22,9 @@ def about(request):
     return HttpResponse(template.render(context, request))    
 
 def tragos(request):
-    template = loader.get_template('web_de_tragos/publica/tragos.html')
-    context = {'titulo': 'Tragos'}
-    return HttpResponse(template.render(context, request))   
-
+    recetas = Receta.objects.all()
+    return render(request, 'web_de_tragos/publica/tragos.html',{'tragos':recetas})
+       
 
 def contacto(request):
     if request.method == "POST":
