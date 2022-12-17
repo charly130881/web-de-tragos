@@ -7,8 +7,8 @@
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="post-heading">
-                        <h1>Más de 30 tragos!!</h1>
-                        <h2 class="subheading">Sorprendé a tus invitados</h2>                            
+                        <h1>Nuestro catalogo de tragos!!</h1>
+                        <h2 class="subheading">Sorprendé a tus invitados con todos los mejores tragos de todas partes del Mundo.</h2>                            
                     </div>
                 </div>
             </div>
@@ -19,24 +19,38 @@
 {% block contenido %}
 
     <div>
-        {% for trago in tragos %}
-
-            <article class="mb-4">
-                <div class="container px-4 px-lg-5">
-                    <div class="row gx-4 gx-lg-5 justify-content-center">
-                        <div class="col-md-10 col-lg-8 col-xl-7">
-                            <h3> {{trago.nombre}} </h3>
-                            <img src= "{{trago.imagen.url}}" alt="" height="450px">
-                            <h4>Lo que necesitás</h4>
-                            <textarea rows="6" cols="50"> {{trago.Ingredientes}} </textarea>
-                            <h4>Preparación</h4>
-                            <p> {{trago.preparacion}} </p>                        
+        {% if tragos|length > 0 %}
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+                {% for trago in tragos %}
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img class="bd-placeholder-img card-img-top" width="100%" src="{{trago.imagen.url}}" alt="{{trago.nombre}}"
+                            width="20%">
+                            <div class="card-body">
+                                <h3>{{trago.nombre}}</h3>
+                                <p class="card-text">{{trago.funcion}}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="{% url 'receta' trago.id%}" title="receta">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" >Ver</button></a>
+                                    </div>
+                                    <small class="text-muted">{{trago.caracteristica}}</small>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="row justify-content-center">
+                <div class="col-4 text-center">
+                    <div class="alert alert-warning" role="alert">
+                        <p>No hay tragos disponibles actualmente, en breve estaremos actualizando todo nuestro catalogo de tragos para que puedas disfrutar y aprender los mas sabrosos y refrescates tragos de todo el mundo </p>
+                    </div>
                 </div>
-            </article>
-            
-        {% endfor %}
+            </div>
+        
+        {% endif %}
     </div>
 
 {% endblock contenido %}

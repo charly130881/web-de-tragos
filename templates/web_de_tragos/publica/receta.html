@@ -1,0 +1,39 @@
+{% extends './base.html' %}
+    
+{% block cabecera %}
+    {% load static %}
+    <header class="masthead" style="background-image: url({{receta.imagen.url}})">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="post-heading">
+                        <h1>{{receta.nombre}}</h1>                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock cabecera %}
+
+{% block contenido %}
+
+    <article class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    {% comment %} <h3> {{receta.nombre}} </h3> {% endcomment %}
+                    {% comment %} <img src= "{{receta.imagen.url}}" alt="" height="400px"> {% endcomment %}
+                    <h4>Tamaño:</h4><span>{{receta.tamaño}}</span>
+                    <h4>Funcion:</h4><span>{{receta.funcion}}</span>
+                    <h4>Caracteristica:</h4><span>{{receta.caracteristica}}</span>
+                    <h4>Lo que necesitás</h4>
+                    <p> {{receta.Ingredientes}} </p>
+                    <h4>Preparación</h4>
+                    <p> {{receta.preparacion}} </p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+{% endblock contenido %}
