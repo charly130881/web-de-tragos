@@ -1,6 +1,8 @@
 from django import forms
-from django.forms import ValidationError
+from django.forms import ValidationError, DateField, EmailField, CharField, Form, ImageField, PasswordInput, SlugField
 from .models import Receta, Tamaño, Caracteristica, Funcion
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 
 def solo_caracteres(value):
@@ -85,4 +87,17 @@ class CaracteristicaForm(forms.ModelForm):
         model = Caracteristica
         fields = '__all__'
 
+
+class UserRegisterForm(UserCreationForm):
+    
+    email = EmailField()
+    password1 = CharField(label='Contraseña', widget=forms.PasswordInput)
+    password2 = CharField(label='Repetir Contraseña', widget=forms.PasswordInput)
+    first_name = CharField(label='Nombre/s', widget=forms.TextInput)
+    last_name = CharField(label='Apellido/s', widget=forms.TextInput)
+    
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2', 'first_name', 'last_name']
+        help_text = {k:"" for k in fields}
 

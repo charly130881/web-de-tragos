@@ -31,8 +31,24 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href={% url 'about' %}>About</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href={% url 'tragos' %}>Tragos</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href={% url 'contacto' %}>Contacto</a></li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4">Bienvenido\a, {{ user.username }}</a></li>                     
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href={% url 'logout' %}>Cerrar Sesión</a></li> 
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href={% url 'login' %}>Iniciar Sesion</a></li>                        
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href={% url 'registro' %}>Registrarse</a></li> 
+                        {% endif %}    
                     </ul>
                 </div>
+{% comment %}                 <div class="col-md-3 text-end">
+                    {% if user.is_authenticated %}
+                        <p type="text" style="display: inline" class="">Bienvenido\a, {{ user.username }}.</p>
+                        <a type="button" href="{% url 'logout' %}" class="btn btn-outline-primary me-2">Cerrar Sesión</a>
+                    {% else %}
+                        <a type="button" href="{% url 'login' %}" class="btn btn-outline-primary me-2">Iniciar Sesión</a>
+                        <a type="button" href="{% url 'registro' %}" class="btn btn-dark">Registrarse</a>
+                    {% endif %}
+                </div> {% endcomment %}
             </div>
         </nav>
         <!-- Page Header-->

@@ -1,0 +1,14 @@
+{% extends 'web_de_tragos/publica/base.html' %} {% block contenido %} {% if form.erros %}
+<p style="color: red;">Están mal los datos, revisar</p>
+{% endif %}
+
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+
+    <button class="btn btn-outline-dark " type="submit" id="submit">Registrarse</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-outline-dark" href="{% url 'inicio' %}">Volver</a>
+</form>
+
+{% endblock contenido %}
