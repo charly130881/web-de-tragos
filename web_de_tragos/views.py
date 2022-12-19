@@ -2,15 +2,16 @@ from django.shortcuts import render, redirect
 from multiprocessing import context
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from .forms import ContactoForm, RecetaFormValidado, TamañoForm, CaracteristicaForm, FuncionForm
-from .forms import ContactoForm, RecetaForm, RecetaFormValidado
+from .forms import ContactoForm, RecetaForm, RecetaFormValidado, UserRegisterForm
 from django.contrib import messages
 from datetime import datetime
 from .models import Receta, Tamaño, Caracteristica, Funcion
 from django.views import View
-from django.views.generic import ListView
-
+from django.views.generic import ListView, CreateView
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):   
@@ -25,6 +26,7 @@ def tragos(request):
     recetas = Receta.objects.all().order_by('fecha_creacion')
     return render(request, 'web_de_tragos/publica/tragos.html',{'tragos':recetas})
 
+@login_required
 def receta(request, nro_id):
     receta = Receta.objects.get(id=nro_id)
     return render(request, 'web_de_tragos/publica/receta.html', {'receta':receta, 'nro_id':nro_id})
@@ -41,4 +43,11 @@ def contacto(request):
         contacto_form = ContactoForm()
     return render(request, "web_de_tragos/publica/contacto.html", {'contacto_form': contacto_form})
 
+class UserCreateView(CreateView):
+    model = User  
+    succes_url = reverse_lazy('login.html')
+    template_name = 'register.html'
+    form_class = UserRegisterForm
 
+    def get_success_url(self):
+        return reverse('login')
